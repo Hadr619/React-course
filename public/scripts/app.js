@@ -1,38 +1,54 @@
 "use strict";
 
-// arguments objext - no longer bound with arrow functions
-var add = function add(a, b) {
-  //console.log(arguments);
-  return a + b;
+console.log("App.js is running"); // JSX - Javascript XML
+
+var app = {
+  title: "Indecision App",
+  subTitle: "I'll choose for you!",
+  options: ["one", "two"]
+};
+var template = React.createElement("div", null, React.createElement("h1", null, app.title), app.subTitle && React.createElement("p", null, app.subTitle), React.createElement("p", null, app.options.length > 0 ? "Here are your options fool" : "No Options"));
+var count = 0;
+
+var addOne = function addOne() {
+  count++;
+  renderCounterApp();
 };
 
-console.log(add(55, 1)); // this keyword - no longer bound
-
-var user = {
-  name: "Perry Reid",
-  cities: ["San Diego", "Fresno", "Bridgman"],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    return this.cities.map(function (city) {
-      return _this.name + " has lived in " + city;
-    });
+var minusOne = function minusOne() {
+  if (count > 0) {
+    count--;
+    renderCounterApp();
   }
 };
-console.log(user.printPlacesLived()); // challenge area
 
-var multiplier = {
-  //numbers - array of numbers
-  numbers: [2, 6, 8, 24],
-  //multiplyBy - single number
-  multiplyBy: 3,
-  //multiply - return new array numbers have been multiplied
-  multiply: function multiply() {
-    var _this2 = this;
-
-    return this.numbers.map(function (number) {
-      return number * _this2.multiplyBy;
-    });
-  }
+var reset = function reset() {
+  count = 0;
+  renderCounterApp();
 };
-console.log(multiplier.multiply());
+
+var templateTwo = React.createElement("div", null, React.createElement("h1", null, "Count: ", count), React.createElement("button", {
+  onClick: addOne
+}, "+1"), React.createElement("button", {
+  onClick: minusOne
+}, "-1"), React.createElement("button", {
+  onClick: reset
+}, "Reset")); // Challenge
+// Make button "-1" - setup minusOne function and register - log "minusOne"
+// make reset button "reset" - setup reset function - log "reset"
+
+var appRoot = document.getElementById("app");
+ReactDOM.render(templateTwo, appRoot);
+
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement("div", null, React.createElement("h1", null, "Count: ", count), React.createElement("button", {
+    onClick: addOne
+  }, "+1"), React.createElement("button", {
+    onClick: minusOne
+  }, "-1"), React.createElement("button", {
+    onClick: reset
+  }, "Reset"));
+  ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
