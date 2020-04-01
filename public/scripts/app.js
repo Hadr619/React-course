@@ -98,11 +98,12 @@ var Options = /*#__PURE__*/function (_React$Component4) {
   _createClass(Options, [{
     key: "render",
     value: function render() {
-      return React.createElement("div", null, this.props.options.map(function (option, index) {
-        return React.createElement("p", {
-          key: index
-        }, option);
-      }), React.createElement("ul", null, React.createElement("li", null, React.createElement(Option, null))));
+      return React.createElement("div", null, this.props.options.map(function (option) {
+        return React.createElement(Option, {
+          key: option,
+          optionText: option
+        });
+      }));
     }
   }]);
 
@@ -122,7 +123,7 @@ var Option = /*#__PURE__*/function (_React$Component5) {
   _createClass(Option, [{
     key: "render",
     value: function render() {
-      return React.createElement("div", null, "Option component here");
+      return React.createElement("div", null, this.props.optionText);
     }
   }]);
 
